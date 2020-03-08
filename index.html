@@ -16,34 +16,64 @@
                         <h1 class="display-4" style="text-align: center;">Password Generator</h1>
                         <p class="lead" style="text-align: center;">Creating a password based on character length (atleast 8 and at most 128 characters) and character types (atleast one)</p>
                         <hr class="my-4">
-                        <p style="text-align: center;">
+                        <p style="text-align: center; font-size: xx-large;">
                         <br>
                         <br>
-                        <strong>*       *      *       *       *       *       *       *       *       *</strong>
+                        <strong id="Password-text">*       *      *       *       *       *       *       *       *       *</strong>
                         <br>
                         <br>
-
-                        
-                        
-                        
                         </p>
                         <div class="text-center">
-                            <button type="button" class="btn btn-primary">Generate Password</button>
+                            <button type="button" class="btn btn-primary" id= "generate-button">Generate Password</button>
                           </div>
                       </div>
                 </div>
             </div>
-
-
-
-
-
-
-
         </div>
 
         <script>
+            document.getElementById("generate-button").addEventListener("click",function(){
+                var numChar = prompt("Enter number of characters (8 through 128");
+                var password = [];
+                var lowercase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
+                var uppercase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
+                var numeric = ["0","1","2","3","4","5","6","7","8","9"];
+                var special = ["~","!","#","$","%","^","&","*","(",")","-","_","=","+","|","?","<",">",".",";",":"];
+                var passwordPossiblities = [lowercase, uppercase, numeric, special];
 
+                console.log(passwordPossiblities);
+                if(numChar > 8 && numChar < 128) {
+                    password.length = numChar;
+                }
+                else{
+                    alert("Invalid amount of characters.");
+                }
+                var characterTypes = prompt("Enter types of characters involoved- l = lowercase, u = uppercase, n = numeric, or s = special characters. Please seperate by commas. (ex. l,u,s)");
+                var howToSplit = characterTypes.split(",");
+                console.log(howToSplit);
+                if( howToSplit.indexOf("l")>= 0 && howToSplit.indexOf("u") >= 0 && howToSplit.indexOf("n") >= 0 && howToSplit.indexOf("s") >= 0){
+                     for(var i = 0; i < numChar; i++){
+                        console.log(passwordPossiblities);
+
+                        var pass1 = passwordPossiblities[Math.floor(Math.random() * 4)];
+                        console.log(pass1);
+                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
+                        console.log(password[i]);
+                        
+                     }
+                    
+                }
+                var newlyMadePassword = ""
+                for(var i = 0; i < password.length; i++){
+                    newlyMadePassword += password[i];
+
+        
+                }
+                document.getElementById("Password-text").textContent = newlyMadePassword;
+            })
+            
+            
+        
         </script>
     </body>
 
