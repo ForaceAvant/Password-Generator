@@ -1,153 +1,119 @@
 <!DOCTYPE html>
-    <html lang='en'>
-       
-    <head>
-        <meta charset="UTF-8">
-        <title>Password Generator</title>
-        <!-- Linking Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    </head>
+<html lang='en'>
 
-    <body>
-        <div class="container">
-            <div class="row">
-                <div class="col">
-                    <div class="jumbotron">
-                        <h1 class="display-4" style="text-align: center;">Password Generator</h1>
-                        <p class="lead" style="text-align: center;">Creating a password based on character length (atleast 8 and at most 128 characters) and character types (atleast one)</p>
-                        <hr class="my-4">
-                        <p style="text-align: center; font-size: xx-large;">
+<head>
+    <meta charset="UTF-8">
+    <title>Password Generator</title>
+    <!-- Linking Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <div class="jumbotron">
+                    <h1 class="display-4" style="text-align: center;">Password Generator</h1>
+                    <p class="lead" style="text-align: center;">Creating a password based on character length (atleast 8
+                        and at most 128 characters) and character types (atleast one)</p>
+                    <hr class="my-4">
+                    <p style="text-align: center; font-size: xx-large;">
                         <br>
                         <br>
-                        <strong id="Password-text">*       *      *       *       *       *       *       *       *       *</strong>
+                        <strong id="Password-text">* * * * * * * * * *</strong>
                         <br>
                         <br>
-                        </p>
-                        <div class="text-center">
-                            <button type="button" class="btn btn-primary" id= "generate-button">Generate Password</button>
-                          </div>
-                      </div>
+                    </p>
+                    <div class="text-center">
+                        <button type="button" class="btn btn-primary" id="generate-button">Generate Password</button>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <script>
-            document.getElementById("generate-button").addEventListener("click",function(){
-                var numChar = prompt("Enter number of characters (8 through 128");
+    <script>
+        document.getElementById("generate-button").addEventListener("click", function () {
+            var numChar = prompt("Enter number of characters (8 through 128)");
+            var password = [];
+            var lowercase = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+            var uppercase = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+            var numeric = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+            var special = ["~", "!", "#", "$", "%", "^", "&", "*", "(", ")", "-", "_", "=", "+", "|", "?", "<", ">", ".", ";", ":"];
+            var newlyMadePassword = "Please Enter Values Within Bounds Given";
+            var validUserInputs = true;
+
+
+            function passwordMaker(howToSplit) {
+                var passwordPossiblities = [];
                 var password = [];
-                var lowercase = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"];
-                var uppercase = ["A","B","C","D","E","F","G","H","I","J","K","L","M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"];
-                var numeric = ["0","1","2","3","4","5","6","7","8","9"];
-                var special = ["~","!","#","$","%","^","&","*","(",")","-","_","=","+","|","?","<",">",".",";",":"];
-                var passwordPossiblities = [lowercase, uppercase, numeric, special];
 
-                console.log(passwordPossiblities);
-                if(numChar > 8 && numChar < 128) {
+                //Checks to see what type of characters are going to be used in password and creates an array with those characters.
+                if (howToSplit.indexOf("l") >= 0) {
+                    passwordPossiblities[passwordPossiblities.length] = lowercase;
+                }
+                if (howToSplit.indexOf("u") >= 0) {
+                    passwordPossiblities[passwordPossiblities.length] = uppercase;
+                }
+                if (howToSplit.indexOf("n") >= 0) {
+                    passwordPossiblities[passwordPossiblities.length] = numeric;
+                }
+                if (howToSplit.indexOf("s") >= 0) {
+                    passwordPossiblities[passwordPossiblities.length] = special;
+                }
+
+                //randomizing for-loop that creates an array of characters.
+                for (var i = 0; i < numChar; i++) {
+                    var pass1 = passwordPossiblities[Math.floor(Math.random() * passwordPossiblities.length)];
+                    console.log(pass1);
+                    password[i] = pass1[Math.floor(Math.random() * pass1.length)];
+                    console.log(password[i]);
+                }
+
+                return password;
+            }
+
+            //This allows the program to only run when correct parameters are entered.
+            while (validUserInputs) {
+
+                if (numChar >= 8 && numChar <= 128) {
                     password.length = numChar;
                 }
-                else{
+                else {
                     alert("Invalid amount of characters.");
+                    validUserInputs = false;
+                    console.log("Program recieved incorrect password length choice")
+                    break;
                 }
+                
                 var characterTypes = prompt("Enter types of characters involoved- l = lowercase, u = uppercase, n = numeric, or s = special characters. Please seperate by commas. (ex. l,u,s)");
                 var howToSplit = characterTypes.split(",");
                 console.log(howToSplit);
-                if( howToSplit.indexOf("l")>= 0 && howToSplit.indexOf("u") >= 0 && howToSplit.indexOf("n") >= 0 && howToSplit.indexOf("s") >= 0){
-                     for(var i = 0; i < numChar; i++){
-                        console.log(passwordPossiblities);
-
-                        var pass1 = passwordPossiblities[Math.floor(Math.random() * 4)];
-                        console.log(pass1);
-                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
-                        console.log(password[i]);
-                        
-                     }
-                    
+                if(howToSplit.indexOf("l") < 0 && howToSplit.indexOf("u") < 0 && howToSplit.indexOf("n") < 0 && howToSplit.indexOf("s") < 0){
+                    validUserInputs = false;
+                    console.log("Program isn't getting correct format entries")
+                    break;
                 }
-                else if( howToSplit.indexOf("l")>= 0 && howToSplit.indexOf("u") >= 0 && howToSplit.indexOf("n") >= 0){
-                     for(var i = 0; i < numChar; i++){
-                        console.log(passwordPossiblities);
 
-                        var pass1 = passwordPossiblities[Math.floor(Math.random() * 3)];
-                        console.log(pass1);
-                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
-                        console.log(password[i]);
-                        
-                     }
-                    
-                }
-                else if( howToSplit.indexOf("l")>= 0 && howToSplit.indexOf("u") >= 0){
-                     for(var i = 0; i < numChar; i++){
-                        console.log(passwordPossiblities);
 
-                        var pass1 = passwordPossiblities[Math.floor(Math.random() * 2)];
-                        console.log(pass1);
-                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
-                        console.log(password[i]);
-                        
-                     }
-                    
-                }
-                else if( howToSplit.indexOf("l")>= 0){
-                     for(var i = 0; i < numChar; i++){
-                        console.log(passwordPossiblities);
+                //Function call to create password based on user input.
 
-                        var pass1 = passwordPossiblities[0];
-                        console.log(pass1);
-                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
-                        console.log(password[i]);
-                        
-                     }
-                    
-                }
-                else if(howToSplit.indexOf("u") >= 0){
-                     for(var i = 0; i < numChar; i++){
-                        console.log(passwordPossiblities);
-
-                        var pass1 = passwordPossiblities[1];
-                        console.log(pass1);
-                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
-                        console.log(password[i]);
-                        
-                     }
-                    
-                }
-                else if(howToSplit.indexOf("n") >= 0){
-                     for(var i = 0; i < numChar; i++){
-                        console.log(passwordPossiblities);
-
-                        var pass1 = passwordPossiblities[2];
-                        console.log(pass1);
-                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
-                        console.log(password[i]);
-                        
-                     }
-                    
-                }
-                else if( howToSplit.indexOf("s")>= 0){
-                     for(var i = 0; i < numChar; i++){
-                        console.log(passwordPossiblities);
-
-                        var pass1 = passwordPossiblities[3];
-                        console.log(pass1);
-                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
-                        console.log(password[i]);
-                        
-                     }
-                    
-                }
-                var newlyMadePassword = ""
-                for(var i = 0; i < password.length; i++){
+                password = passwordMaker(howToSplit);
+                console.log(password);
+                newlyMadePassword = ""
+                for (var i = 0; i < password.length; i++) {
                     newlyMadePassword += password[i];
-
-        
                 }
-                document.getElementById("Password-text").textContent = newlyMadePassword;
-            })
-            
-            
-        
-        </script>
-    </body>
+            }
+            //Updating document to show password on webpage.
+            document.getElementById("Password-text").textContent = newlyMadePassword;
+        })
 
-    </html>
-    </DOCTYPE>
+
+
+    </script>
+</body>
+
+</html>
+</DOCTYPE>
