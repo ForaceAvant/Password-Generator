@@ -14,16 +14,16 @@ document.getElementById("generate-button").addEventListener("click", function ()
         var password = [];
 
         //Checks to see what type of characters are going to be used in password and creates an array with those characters.
-        if (howToSplit.indexOf("l") >= 0) {
+        if (howToSplit.indexOf("l") >= 0 || howToSplit.indexOf("L") >= 0) {
             passwordPossiblities[passwordPossiblities.length] = lowercase;
         }
-        if (howToSplit.indexOf("u") >= 0) {
+        if (howToSplit.indexOf("u") >= 0 || howToSplit.indexOf("U") >= 0) {
             passwordPossiblities[passwordPossiblities.length] = uppercase;
         }
-        if (howToSplit.indexOf("n") >= 0) {
+        if (howToSplit.indexOf("n") >= 0 || howToSplit.indexOf("N") >= 0) {
             passwordPossiblities[passwordPossiblities.length] = numeric;
         }
-        if (howToSplit.indexOf("s") >= 0) {
+        if (howToSplit.indexOf("s") >= 0 || howToSplit.indexOf("S") >= 0) {
             passwordPossiblities[passwordPossiblities.length] = special;
         }
 
