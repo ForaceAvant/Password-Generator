@@ -69,6 +69,7 @@ document.getElementById("generate-button").addEventListener("click", function ()
         for (var i = 0; i < password.length; i++) {
             newlyMadePassword += password[i];
         }
+        break;
     }
     //Updating document to show password on webpage.
     document.getElementById("Password-text").textContent = newlyMadePassword;
