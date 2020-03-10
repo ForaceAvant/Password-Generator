@@ -63,6 +63,42 @@
                      }
                     
                 }
+                else if( howToSplit.indexOf("l")>= 0 && howToSplit.indexOf("u") >= 0 && howToSplit.indexOf("n") >= 0){
+                     for(var i = 0; i < numChar; i++){
+                        console.log(passwordPossiblities);
+
+                        var pass1 = passwordPossiblities[Math.floor(Math.random() * 3)];
+                        console.log(pass1);
+                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
+                        console.log(password[i]);
+                        
+                     }
+                    
+                }
+                else if( howToSplit.indexOf("l")>= 0 && howToSplit.indexOf("u") >= 0){
+                     for(var i = 0; i < numChar; i++){
+                        console.log(passwordPossiblities);
+
+                        var pass1 = passwordPossiblities[Math.floor(Math.random() * 2)];
+                        console.log(pass1);
+                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
+                        console.log(password[i]);
+                        
+                     }
+                    
+                }
+                else if( howToSplit.indexOf("l")>= 0){
+                     for(var i = 0; i < numChar; i++){
+                        console.log(passwordPossiblities);
+
+                        var pass1 = passwordPossiblities[0];
+                        console.log(pass1);
+                        password[i] = pass1[Math.floor(Math.random() * pass1.length)];
+                        console.log(password[i]);
+                        
+                     }
+                    
+                }
                 var newlyMadePassword = ""
                 for(var i = 0; i < password.length; i++){
                     newlyMadePassword += password[i];
